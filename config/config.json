@@ -1,80 +1,17 @@
 {
-  "simulation": {
-    "time_step": 1.0,
-    "max_steps": 10000,
-    "save_interval": 100,
-    "verbose": false
-  },
-  "satellites": [
-    {
-      "id": 1000,
-      "type": 0,
-      "function_type": 2,
-      "a": 42164.0,
-      "e": 0.01,
-      "i": 0.5,
-      "omega_big": 0.0,
-      "omega_small": 0.0,
-      "m0": 0.0,
-      "fuel": 500.0
+    "red": {
+        "attack": 3,
+        "recon": 3,
+        "defense": 3
     },
-    {
-      "id": 1001,
-      "type": 0,
-      "function_type": 1,
-      "a": 42164.0,
-      "e": 0.01,
-      "i": 0.5,
-      "omega_big": 0.0,
-      "omega_small": 0.0,
-      "m0": 120.0,
-      "fuel": 500.0
+    "blue": {
+        "attack": 2,
+        "recon": 2,
+        "defense": 2
     },
-    {
-      "id": 1002,
-      "type": 0,
-      "function_type": 3,
-      "a": 42164.0,
-      "e": 0.01,
-      "i": 0.5,
-      "omega_big": 0.0,
-      "omega_small": 0.0,
-      "m0": 240.0,
-      "fuel": 500.0
-    },
-    {
-      "id": 2000,
-      "type": 1,
-      "function_type": 1,
-      "a": 42164.0,
-      "e": 0.001,
-      "i": 0.1,
-      "omega_big": 0.0,
-      "omega_small": 0.0,
-      "m0": 0.0,
-      "fuel": 300.0
+    "strategy": "GJ",
+    "simulation": {
+        "max_time": 500000,
+        "time_step": 1
     }
-  ],
-  "strategy_thresholds": {
-    "attack_distance": 3000.0,
-    "inspect_distance": 2000.0,
-    "defense_distance": 4000.0,
-    "critical_distance": 1000.0,
-    "warning_distance": 5000.0
-  },
-  "formation_parameters": {
-    "lambert_target_distance": 50.0,
-    "lambert_max_delta_v": 0.1,
-    "lambert_tof_min_factor": 0.15,
-    "lambert_tof_max_factor": 0.40,
-    "ellipse_min_distance": 50.0,
-    "ellipse_max_distance": 70.0,
-    "circle_complete_threshold": 0.95
-  },
-  "attitude_parameters": {
-    "max_angular_rate": 0.01,
-    "max_angular_accel": 0.002,
-    "control_kp": 2.0,
-    "control_kd": 1.0
-  }
 }

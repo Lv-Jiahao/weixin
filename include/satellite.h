@@ -1,3 +1,5 @@
+/* 卫星数据结构和轨道计算 */
+
 #ifndef SATELLITE_H
 #define SATELLITE_H
 
@@ -8,7 +10,7 @@
 /* ==================== 卫星创建和销毁 ==================== */
 
 /* 创建卫星 */
-Satellite* satellite_create(int id, uint8_t type, uint8_t function_type);
+Satellite* satellite_create(int id, uint8_t team, uint8_t type, uint8_t function_type);
 
 /* 创建卫星（完整参数） */
 Satellite* satellite_create_full(
@@ -88,8 +90,11 @@ int satellite_check_illumination(Satellite *observer, Satellite *target);
 
 /* ==================== 历史轨迹管理 ==================== */
 
-/* 初始化历史缓冲 */
-int satellite_history_init(Satellite *sat, int capacity);
+// /* 初始化历史缓冲 */
+// int satellite_history_init(Satellite *sat, int capacity);
+
+/* 初始化历史（兼容函数） */
+void satellite_init_history(Satellite *sat, int capacity);
 
 /* 记录当前位置到历史 */
 int satellite_history_append(Satellite *sat);

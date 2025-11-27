@@ -8,8 +8,6 @@ CMakeFiles/libsatellite_static.dir/src/attitude.c.o: ../include/types.h
 CMakeFiles/libsatellite_static.dir/src/attitude.c.o: ../include/vector3.h
 CMakeFiles/libsatellite_static.dir/src/attitude.c.o: ../src/attitude.c
 
-CMakeFiles/libsatellite_static.dir/src/config/config.c.o: ../include/config/config.h
-CMakeFiles/libsatellite_static.dir/src/config/config.c.o: ../include/types.h
 CMakeFiles/libsatellite_static.dir/src/config/config.c.o: ../src/config/config.c
 
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/constants.h

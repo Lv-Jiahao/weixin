@@ -3,13 +3,22 @@
 #include <stdio.h>
 #include <string.h>
 
-Satellite* satellite_create(int id, uint8_t type, uint8_t function_type) {
+Satellite* satellite_create(int id, uint8_t team, uint8_t type, uint8_t function_type) {
     Satellite *sat = (Satellite*)malloc(sizeof(Satellite));
     if (!sat) return NULL;
-    
+
+    // GEO卫星在J2000坐标系中的随机初始位置
+    double geo_nominal_radius = 42164000.0;  // GEO标称轨道高度42164km
+
+    // 根据实际范围生成随机位置
+    double random_x = geo_nominal_radius + ((double)rand() / RAND_MAX * 2 - 1) * 10000.0;  // 42154km - 42174km
+    double random_y = ((double)rand() / RAND_MAX * 2 - 1) * 150000.0;  // -150km - +150km
+    double random_z = ((double)rand() / RAND_MAX * 2 - 1) * 75000.0;   // -75km - +75km
+
     sat->id = id;
     sat->type = type;
-    sat->function_type = function_type;
+    sat->team = team;  // 0 红、1蓝
+    sat->function_type = function_type;   //攻击、侦查、防御 :0 \1 \2
     sat->orbital_elements.a = 7000000;
     sat->orbital_elements.e = 0.01;
     sat->orbital_elements.i = 0.1;
@@ -35,8 +44,8 @@ Satellite* satellite_create(int id, uint8_t type, uint8_t function_type) {
     sat->attitude.body_axis = (Vector3){0, 0, 1};
     sat->attitude.target_id = -1;
     sat->attitude.step_count = 0;
+    sat->state.position = (Vector3){random_x, random_y, random_z};
     
-    sat->state.position = (Vector3){7000000, 0, 0};
     sat->state.velocity = (Vector3){0, 7546, 0};
     sat->state.time = 0;
     

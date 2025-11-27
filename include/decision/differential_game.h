@@ -1,3 +1,4 @@
+/* 博弈策略分配 */
 #ifndef DIFFERENTIAL_GAME_H
 #define DIFFERENTIAL_GAME_H
 

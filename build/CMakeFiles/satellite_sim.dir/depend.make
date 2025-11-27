@@ -8,8 +8,6 @@ CMakeFiles/satellite_sim.dir/src/attitude.c.o: ../include/types.h
 CMakeFiles/satellite_sim.dir/src/attitude.c.o: ../include/vector3.h
 CMakeFiles/satellite_sim.dir/src/attitude.c.o: ../src/attitude.c
 
-CMakeFiles/satellite_sim.dir/src/config/config.c.o: ../include/config/config.h
-CMakeFiles/satellite_sim.dir/src/config/config.c.o: ../include/types.h
 CMakeFiles/satellite_sim.dir/src/config/config.c.o: ../src/config/config.c
 
 CMakeFiles/satellite_sim.dir/src/decision/decision_tree.c.o: ../include/constants.h
@@ -88,6 +86,7 @@ CMakeFiles/satellite_sim.dir/src/kinematics.c.o: ../include/vector3.h
 CMakeFiles/satellite_sim.dir/src/kinematics.c.o: ../src/kinematics.c
 
 CMakeFiles/satellite_sim.dir/src/main.c.o: ../include/attitude.h
+CMakeFiles/satellite_sim.dir/src/main.c.o: ../include/config/config.h
 CMakeFiles/satellite_sim.dir/src/main.c.o: ../include/constants.h
 CMakeFiles/satellite_sim.dir/src/main.c.o: ../include/decision/formation_manager.h
 CMakeFiles/satellite_sim.dir/src/main.c.o: ../include/kinematics.h

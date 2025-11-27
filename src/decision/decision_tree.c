@@ -59,8 +59,8 @@ DecisionContext* decision_context_create(int num_red, int num_blue) {
     DecisionContext *ctx = (DecisionContext*)malloc(sizeof(DecisionContext));
     if (!ctx) return NULL;
     
-    ctx->num_red_satellites = num_red;
-    ctx->num_blue_satellites = num_blue;
+    ctx-> num_red = num_red;
+    ctx-> num_blue = num_blue;
     ctx->strategy_assignments = (StrategyType*)malloc(sizeof(StrategyType) * num_red);
     
     return ctx;
@@ -72,9 +72,9 @@ void decision_context_destroy(DecisionContext *ctx) {
     free(ctx);
 }
 
-double decision_tree_calculate_silhouette(Satellite **satellites, int num_satellites, KMeansResult *result) {
-    if (!satellites || !result) return 0.0;
-    return 0.5;
+int decision_tree_calculate_silhouette(Satellite **satellites, int num_satellites, KMeansResult *result) {
+    if (!satellites || !result) return 0;
+    return 1;
 }
 
 double decision_tree_calculate_davies_bouldin(KMeansResult *result) {

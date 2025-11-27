@@ -7,8 +7,22 @@
 #include <types.h>
 #include <satellite.h>
 #include <kinematics.h>
+#include "config/config.h"
 
 static const char *OUTPUT_DIR = "output";
+
+
+Config Init_config = {
+    .red_attack = 3,
+    .red_recon = 3,
+    .red_defense = 3,
+    .blue_attack = 2,
+    .blue_recon = 2,
+    .blue_defense = 2,
+    .strategy = "GJ",
+    .max_time = 500000.0,
+    .time_step = 1.0
+};
 
 void print_banner(void) {
     printf("\n");
@@ -42,9 +56,9 @@ void print_progress(uint32_t step_count, uint32_t max_steps, double simulation_t
 
 int initialize_simulation(KinematicsEngine **engine_out) {
     printf("正在初始化仿真...\n");
-    
+    // todo 时间步
     SimulationConfig config = {
-        .time_step = 1.0,
+        .time_step = 10.0,
         .max_steps = 10000,
         .save_interval = 100,
         .hohmann_precision = 1e-6,
@@ -63,16 +77,101 @@ int initialize_simulation(KinematicsEngine **engine_out) {
     }
     
     printf("✓ 运动学引擎已创建\n");
-    
-    for (int i = 0; i < 5; i++) {
-        Satellite *sat = satellite_create(i, i % 2, i % 3);
+
+    // 红星数
+    int red_sum = Init_config.red_attack + Init_config.red_recon + Init_config.red_defense;
+    int id = 1000;
+
+    // 红色 攻击卫星
+    for (size_t i = 0; i < Init_config.red_attack; i++) {
+        Satellite *sat = satellite_create(id, 0, 0, 0);  // 团队0=红队，功能0=攻击
         if (!sat) {
             fprintf(stderr, "错误：无法创建卫星 %d\n", i);
             kinematics_engine_destroy(engine);
             return -1;
         }
         kinematics_engine_add_satellite(engine, sat);
+        id++;
     }
+
+    // 红色 侦察卫星
+    for (size_t i = 0; i < Init_config.red_recon; i++) {
+        Satellite *sat = satellite_create(id, 0, 0, 1);  // 团队0=红队，功能1=侦察
+        if (!sat) {
+            fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+            kinematics_engine_destroy(engine);
+            return -1;
+        }
+        kinematics_engine_add_satellite(engine, sat);
+        id++;
+    }
+
+    // 红色 防御卫星
+    for (size_t i = 0; i < Init_config.red_defense; i++) {
+        Satellite *sat = satellite_create(id, 0, 0, 2);  // 团队0=红队，功能2=防御
+        if (!sat) {
+            fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+            kinematics_engine_destroy(engine);
+            return -1;
+        }
+        kinematics_engine_add_satellite(engine, sat);
+        id++;
+    }
+
+    int blue_sum = Init_config.blue_attack + Init_config.blue_recon + Init_config.blue_defense;
+
+    // 蓝色 攻击卫星
+    for (size_t i = 0; i < Init_config.blue_attack; i++) {
+        Satellite *sat = satellite_create(id, 1, 0, 0);  // 团队1=蓝队，功能0=攻击
+        if (!sat) {
+            fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+            kinematics_engine_destroy(engine);
+            return -1;
+        }
+        kinematics_engine_add_satellite(engine, sat);
+        id++;
+    }
+
+    // 蓝色 侦察卫星
+    for (size_t i = 0; i < Init_config.blue_recon; i++) {
+        Satellite *sat = satellite_create(id, 1, 0, 1);  // 团队1=蓝队，功能1=侦察
+        if (!sat) {
+            fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+            kinematics_engine_destroy(engine);
+            return -1;
+        }
+        kinematics_engine_add_satellite(engine, sat);
+        id++;
+    }
+
+    // 蓝色 防御卫星
+    for (size_t i = 0; i < Init_config.blue_defense; i++) {
+        Satellite *sat = satellite_create(id, 1, 0, 2);  // 团队1=蓝队，功能2=防御
+        if (!sat) {
+            fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+            kinematics_engine_destroy(engine);
+            return -1;
+        }
+        kinematics_engine_add_satellite(engine, sat);
+        id++;
+    }
+    // for (size_t i = 0; i < red_sum; i++)
+    // {
+    //     Satellite *sat = satellite_create(i, , i % 3);
+    //     /* code */
+    // }
+    
+    
+    // // 人为？？？
+    // for (int i = 0; i < 5; i++) {
+    //     Satellite *sat = satellite_create(i, i % 2, i % 3);
+    //     if (!sat) {
+    //         fprintf(stderr, "错误：无法创建卫星 %d\n", i);
+    //         kinematics_engine_destroy(engine);
+    //         return -1;
+    //     }
+    //     kinematics_engine_add_satellite(engine, sat);
+    // }
     
     printf("✓ 已加载 %d 颗卫星\n", engine->satellite_count);
     printf("✓ 卫星初始化完成\n");
@@ -190,6 +289,9 @@ void print_usage(const char *program_name) {
 }
 
 int main(int argc, char *argv[]) {
+    
+
+
     print_banner();
     
     uint32_t max_steps = 10000;

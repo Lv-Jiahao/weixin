@@ -1,3 +1,4 @@
+/* 编队状态机和切换管理 */
 #ifndef FORMATION_MANAGER_H
 #define FORMATION_MANAGER_H
 

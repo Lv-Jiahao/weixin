@@ -6,6 +6,17 @@
 #include <stdint.h>
 #include <time.h>
 
+
+/* ===================== 系统初始化 卫星数据信息 ===================== */
+typedef struct {
+    int red_attack, red_recon, red_defense;   //红星 ：攻击、侦查、防御
+    int blue_attack, blue_recon, blue_defense;  //蓝星 ：攻击、侦查、防御
+    char strategy[32];
+    double max_time, time_step;
+} Config;
+
+
+
 /* ===================== 基础数据类型 ===================== */
 
 /* 三维向量 */
@@ -83,6 +94,7 @@ typedef struct {
 typedef struct Satellite {
     /* 基本信息 */
     int id;                    // 卫星ID
+    uint8_t team;              // 0 红、1 蓝      
     uint8_t type;              // 卫星类型 (HF/LF)
     uint8_t function_type;     // 功能类型 (攻击/侦察/防护)
     
@@ -203,6 +215,7 @@ typedef struct {
     /* 策略参数 */
     StrategyThresholds strategy;
 } SimulationConfig;
+
 
 /* ===================== 仿真引擎 ===================== */
 /* KinematicsEngine定义在kinematics.h中 */

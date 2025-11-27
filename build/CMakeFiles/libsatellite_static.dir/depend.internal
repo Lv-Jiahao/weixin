@@ -9,8 +9,6 @@ CMakeFiles/libsatellite_static.dir/src/attitude.c.o
  ../include/vector3.h
  /home/haney/code-(c)/outputs/src/attitude.c
 CMakeFiles/libsatellite_static.dir/src/config/config.c.o
- ../include/config/config.h
- ../include/types.h
  /home/haney/code-(c)/outputs/src/config/config.c
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o
  ../include/constants.h
