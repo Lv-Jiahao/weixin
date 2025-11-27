@@ -1,0 +1,5 @@
+/home/haney/code-(c)/outputs/build/CMakeFiles/rebuild_cache.dir
+/home/haney/code-(c)/outputs/build/CMakeFiles/edit_cache.dir
+/home/haney/code-(c)/outputs/build/CMakeFiles/test.dir
+/home/haney/code-(c)/outputs/build/CMakeFiles/satellite_sim.dir
+/home/haney/code-(c)/outputs/build/CMakeFiles/libsatellite_static.dir
