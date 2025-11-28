@@ -34,10 +34,10 @@ set(BASE_SOURCES
 # 编队模块
 set(FORMATION_SOURCES
     ${PROJECT_SOURCE_DIR}/formation/formation_base.c
-    ${PROJECT_SOURCE_DIR}/formation/inspect_formation.c
-    ${PROJECT_SOURCE_DIR}/formation/around_formation.c
-    ${PROJECT_SOURCE_DIR}/formation/circumnavigate_formation.c
-    ${PROJECT_SOURCE_DIR}/formation/retreat_formation.c
+    ${PROJECT_SOURCE_DIR}/formation/formation_inspect.c
+    ${PROJECT_SOURCE_DIR}/formation/formation_around.c
+    ${PROJECT_SOURCE_DIR}/formation/formation_circumnavigate.c
+    ${PROJECT_SOURCE_DIR}/formation/formation_retreat.c
 )
 
 # 决策模块

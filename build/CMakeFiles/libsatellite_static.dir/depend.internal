@@ -11,20 +11,12 @@ CMakeFiles/libsatellite_static.dir/src/attitude.c.o
 CMakeFiles/libsatellite_static.dir/src/config/config.c.o
  /home/haney/code-(c)/outputs/src/config/config.c
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o
- ../include/constants.h
  ../include/decision/decision_tree.h
- ../include/quaternion.h
- ../include/satellite.h
  ../include/types.h
- ../include/vector3.h
  /home/haney/code-(c)/outputs/src/decision/decision_tree.c
 CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o
- ../include/constants.h
  ../include/decision/differential_game.h
- ../include/quaternion.h
- ../include/satellite.h
  ../include/types.h
- ../include/vector3.h
  /home/haney/code-(c)/outputs/src/decision/differential_game.c
 CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o
  ../include/constants.h
@@ -34,22 +26,10 @@ CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o
  ../include/types.h
  ../include/vector3.h
  /home/haney/code-(c)/outputs/src/decision/formation_manager.c
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o
- ../include/constants.h
- ../include/formation/formation_base.h
- ../include/quaternion.h
- ../include/satellite.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.o
+ ../include/formation/formation_around.h
  ../include/types.h
- ../include/vector3.h
- /home/haney/code-(c)/outputs/src/formation/around_formation.c
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o
- ../include/constants.h
- ../include/formation/formation_base.h
- ../include/quaternion.h
- ../include/satellite.h
- ../include/types.h
- ../include/vector3.h
- /home/haney/code-(c)/outputs/src/formation/circumnavigate_formation.c
+ /home/haney/code-(c)/outputs/src/formation/formation_around.c
 CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o
  ../include/constants.h
  ../include/formation/formation_base.h
@@ -58,26 +38,26 @@ CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o
  ../include/types.h
  ../include/vector3.h
  /home/haney/code-(c)/outputs/src/formation/formation_base.c
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o
- ../include/constants.h
- ../include/formation/formation_base.h
- ../include/quaternion.h
- ../include/satellite.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.o
+ ../include/formation/formation_circumnavigate.h
  ../include/types.h
- ../include/vector3.h
- /home/haney/code-(c)/outputs/src/formation/inspect_formation.c
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o
- ../include/constants.h
- ../include/formation/formation_base.h
- ../include/quaternion.h
- ../include/satellite.h
+ /home/haney/code-(c)/outputs/src/formation/formation_circumnavigate.c
+CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.o
+ ../include/formation/formation_inspect.h
  ../include/types.h
- ../include/vector3.h
- /home/haney/code-(c)/outputs/src/formation/retreat_formation.c
+ /home/haney/code-(c)/outputs/src/formation/formation_inspect.c
+CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.o
+ ../include/formation/formation_retreat.h
+ ../include/types.h
+ /home/haney/code-(c)/outputs/src/formation/formation_retreat.c
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o
  ../include/attitude.h
  ../include/constants.h
  ../include/decision/formation_manager.h
+ ../include/formation/formation_around.h
+ ../include/formation/formation_circumnavigate.h
+ ../include/formation/formation_inspect.h
+ ../include/formation/formation_retreat.h
  ../include/kinematics.h
  ../include/orbit.h
  ../include/quaternion.h

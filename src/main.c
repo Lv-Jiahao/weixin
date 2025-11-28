@@ -8,8 +8,10 @@
 #include <satellite.h>
 #include <kinematics.h>
 #include "config/config.h"
+#include <decision/decision_tree.h>
+#include <decision/differential_game.h>
 
-static const char *OUTPUT_DIR = "output";
+// static const char *OUTPUT_DIR = "output";
 
 
 Config Init_config = {
@@ -183,18 +185,291 @@ int initialize_simulation(KinematicsEngine **engine_out) {
     return 0;
 }
 
+// int run_simulation(KinematicsEngine *engine, uint32_t max_steps, int verbose) {
+//     printf("开始仿真循环...\n");
+//     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+    
+//     clock_t start_time = clock();
+//     uint32_t step = 0;
+    
+//     while (step < max_steps && kinematics_engine_should_continue(engine)) {
+//         if (kinematics_engine_step(engine) != 0) {
+//             fprintf(stderr, "\n错误：第 %u 步仿真失败\n", step);
+//             break;
+//         }
+        
+//         step++;
+//         double current_time = kinematics_engine_get_current_time(engine);
+        
+//         if (step % 100 == 0) {
+//             print_progress(step, max_steps, current_time);
+//         }
+        
+//         if (verbose && step % 1000 == 0) {
+//             printf("\n");
+//             printf("[第 %u 步] 仿真时间: %.2f小时\n", step, current_time / 3600.0);
+//         }
+//     }
+    
+//     double current_time = kinematics_engine_get_current_time(engine);
+//     print_progress(step, max_steps, current_time);
+//     printf("\n");
+    
+//     clock_t end_time = clock();
+//     double elapsed = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    
+//     printf("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+//     printf("仿真完成！\n");
+//     printf("  仿真步数: %u\n", step);
+//     printf("  仿真时长: %.2f小时\n", current_time / 3600.0);
+//     printf("  执行耗时: %.2f秒\n", elapsed);
+//     printf("  性能: %.2f 步/秒\n", step / elapsed);
+//     printf("\n");
+    
+//     return 0;
+// }
+
+// int run_simulation(KinematicsEngine *engine, uint32_t max_steps, int verbose) {
+//     printf("开始仿真循环...\n");
+//     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+    
+//     // ===== 打开输出文件 =====
+//     FILE *output_file = fopen("red_satellites_trajectory.csv", "w");
+//     if (! output_file) {
+//         fprintf(stderr, "错误：无法打开输出文件\n");
+//         return -1;
+//     }
+    
+//     // 写入CSV头
+//     fprintf(output_file, "step,time(s),sat_id,pos_x(km),pos_y(km),pos_z(km),"
+//                         "vel_x(km/s),vel_y(km/s),vel_z(km/s),fuel(kg),formation,strategy\n");
+    
+//     clock_t start_time = clock();
+//     uint32_t step = 0;
+    
+//     // 用于记录上一次的编队和策略
+//     uint8_t *last_formations = (uint8_t*)calloc(engine->satellite_count, sizeof(uint8_t));
+//     int *last_strategies = (int*)calloc(engine->satellite_count, sizeof(int));
+    
+//     while (step < max_steps && kinematics_engine_should_continue(engine)) {
+//         // ===== 1. 获取所有卫星 =====
+//         int num_sats = 0;
+//         Satellite **all_sats = kinematics_engine_get_all_satellites(engine, &num_sats);
+        
+//         if (! all_sats || num_sats <= 0) break;
+        
+//         // ===== 2. 分离红蓝星 =====
+//         Satellite **red_sats = (Satellite**)malloc(sizeof(Satellite*) * num_sats);
+//         Satellite **blue_sats = (Satellite**)malloc(sizeof(Satellite*) * num_sats);
+//         int num_red = 0, num_blue = 0;
+        
+//         for (int i = 0; i < num_sats; i++) {
+//             if (all_sats[i]->team == 0) {
+//                 red_sats[num_red++] = all_sats[i];
+//             } else {
+//                 blue_sats[num_blue++] = all_sats[i];
+//             }
+//         }
+        
+//         // ===== 3. 每100步执行一次决策 =====
+//         if (step % 100 == 0 && num_red > 0 && num_blue > 0) {
+//             printf("\n[Step %u] 执行决策和编队分配...\n", step);
+            
+//             // 决策树分组
+//             GroupResult *groups = decision_tree_group_satellites(red_sats, num_red, 3);
+            
+//             // 微分博弈分配
+//             GameResult *game = differential_game_assign_strategies(
+//                 red_sats, num_red, blue_sats, num_blue, "GJ");
+            
+//             if (groups && game) {
+//                 // 更新编队和策略
+//                 for (int r = 0; r < num_red; r++) {
+//                     uint8_t formation = decision_tree_select_formation(
+//                         red_sats, num_red, groups, groups->group_ids[r]);
+                    
+//                     red_sats[r]->current_formation = formation;
+//                     last_formations[r] = formation;
+//                     last_strategies[r] = game->strategy_assignments[r];
+//                 }
+                
+//                 printf("✓ 决策完成: %d个红星, %d组编队\n", num_red, groups->num_groups);
+//             }
+            
+//             if (groups) decision_tree_free_result(groups);
+//             if (game) differential_game_free_result(game);
+//         }
+        
+//         // ===== 4. 仿真步进 =====
+//         if (kinematics_engine_step(engine) != 0) {
+//             fprintf(stderr, "\n错误：第 %u 步仿真失败\n", step);
+//             break;
+//         }
+        
+//         // ===== 5. 输出所有红星数据到CSV =====
+//         for (int r = 0; r < num_red; r++) {
+//             Satellite *sat = red_sats[r];
+//             fprintf(output_file, "%u,%.2f,%d,%.6f,%.6f,%.6f,"
+//                                 "%.6f,%.6f,%.6f,%.2f,%u,%d\n",
+//                 step,
+//                 engine->current_time,
+//                 sat->id,
+//                 sat->state.position.x,
+//                 sat->state.position.y,
+//                 sat->state.position.z,
+//                 sat->state.velocity.x,
+//                 sat->state.velocity.y,
+//                 sat->state.velocity.z,
+//                 sat->fuel,
+//                 sat->current_formation,
+//                 last_strategies[r]
+//             );
+//         }
+        
+//         // 清理临时数组
+//         free(red_sats);
+//         free(blue_sats);
+        
+//         step++;
+//         double current_time = kinematics_engine_get_current_time(engine);
+        
+//         if (step % 100 == 0) {
+//             print_progress(step, max_steps, current_time);
+//         }
+        
+//         if (verbose && step % 1000 == 0) {
+//             printf("\n");
+//             printf("[第 %u 步] 仿真时间: %.2f小时\n", step, current_time / 3600.0);
+//         }
+//     }
+    
+//     // ===== 6. 关闭文件和清理 =====
+//     fclose(output_file);
+//     free(last_formations);
+//     free(last_strategies);
+    
+//     double current_time = kinematics_engine_get_current_time(engine);
+//     print_progress(step, max_steps, current_time);
+//     printf("\n");
+    
+//     clock_t end_time = clock();
+//     double elapsed = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    
+//     printf("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+//     printf("仿真完成！\n");
+//     printf("  仿真步数: %u\n", step);
+//     printf("  仿真时长: %.2f小时\n", current_time / 3600.0);
+//     printf("  执行耗时: %.2f秒\n", elapsed);
+//     printf("  性能: %.2f 步/秒\n", step / elapsed);
+//     printf("\n✓ 输出文件: red_satellites_trajectory.csv\n");
+//     printf("\n");
+    
+//     return 0;
+// }
+
 int run_simulation(KinematicsEngine *engine, uint32_t max_steps, int verbose) {
     printf("开始仿真循环...\n");
     printf("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
     
+    // ===== 打开输出文件 =====
+    FILE *output_file = fopen("red_satellites_trajectory.csv", "w");
+    if (! output_file) {
+        fprintf(stderr, "错误：无法打开输出文件\n");
+        return -1;
+    }
+    
+    // 写入CSV头
+    fprintf(output_file, "step,time(s),sat_id,pos_x(km),pos_y(km),pos_z(km),"
+                        "vel_x(km/s),vel_y(km/s),vel_z(km/s),fuel(kg),formation,strategy\n");
+    
     clock_t start_time = clock();
     uint32_t step = 0;
     
+    // 用于记录上一次的编队和策略
+    uint8_t *last_formations = (uint8_t*)calloc(engine->satellite_count, sizeof(uint8_t));
+    int *last_strategies = (int*)calloc(engine->satellite_count, sizeof(int));
+    
     while (step < max_steps && kinematics_engine_should_continue(engine)) {
+        // ===== 1. 获取所有卫星 =====
+        int num_sats = 0;
+        Satellite **all_sats = kinematics_engine_get_all_satellites(engine, &num_sats);
+        
+        if (! all_sats || num_sats <= 0) break;
+        
+        // ===== 2. 分离红蓝星 =====
+        Satellite **red_sats = (Satellite**)malloc(sizeof(Satellite*) * num_sats);
+        Satellite **blue_sats = (Satellite**)malloc(sizeof(Satellite*) * num_sats);
+        int num_red = 0, num_blue = 0;
+        
+        for (int i = 0; i < num_sats; i++) {
+            if (all_sats[i]->team == 0) {
+                red_sats[num_red++] = all_sats[i];
+            } else {
+                blue_sats[num_blue++] = all_sats[i];
+            }
+        }
+        
+        // ===== 3. 每100步执行一次决策 =====
+        if (step % 100 == 0 && num_red > 0 && num_blue > 0) {
+            printf("\n[Step %u] 执行决策和编队分配...\n", step);
+            
+            // 决策树分组
+            GroupResult *groups = decision_tree_group_satellites(red_sats, num_red, 3);
+            
+            if (groups) {
+                // 微分博弈分配 - 正确的函数调用方式
+                GameResult *game = differential_game_assign_strategies(
+                    red_sats, num_red, blue_sats, num_blue, "GJ");
+                
+                if (game) {
+                    // 更新编队和策略
+                    for (int r = 0; r < num_red; r++) {
+                        uint8_t formation = decision_tree_select_formation(
+                            red_sats, num_red, groups, groups->group_ids[r]);
+                        
+                        red_sats[r]->current_formation = formation;
+                        last_formations[r] = formation;
+                        last_strategies[r] = game->strategy_assignments[r];
+                    }
+                    
+                    printf("✓ 决策完成: %d个红星, %d组编队\n", num_red, groups->num_groups);
+                    
+                    differential_game_free_result(game);  // 释放游戏结果
+                }
+                
+                decision_tree_free_result(groups);  // 释放分组结果
+            }
+        }
+        
+        // ===== 4. 仿真步进 =====
         if (kinematics_engine_step(engine) != 0) {
             fprintf(stderr, "\n错误：第 %u 步仿真失败\n", step);
             break;
         }
+        
+        // ===== 5.  输出所有红星数据到CSV =====
+        for (int r = 0; r < num_red; r++) {
+            Satellite *sat = red_sats[r];
+            fprintf(output_file, "%u,%.2f,%d,%.6f,%.6f,%.6f,"
+                                "%.6f,%.6f,%.6f,%.2f,%u,%d\n",
+                step,
+                engine->current_time,
+                sat->id,
+                sat->state.position.x,
+                sat->state.position. y,
+                sat->state. position.z,
+                sat->state.velocity.x,
+                sat->state.velocity.y,
+                sat->state.velocity. z,
+                sat->fuel,
+                sat->current_formation,
+                last_strategies[r]
+            );
+        }
+        
+        // 清理临时数组
+        free(red_sats);
+        free(blue_sats);
         
         step++;
         double current_time = kinematics_engine_get_current_time(engine);
@@ -209,6 +484,11 @@ int run_simulation(KinematicsEngine *engine, uint32_t max_steps, int verbose) {
         }
     }
     
+    // ===== 6. 关闭文件和清理 =====
+    fclose(output_file);
+    free(last_formations);
+    free(last_strategies);
+    
     double current_time = kinematics_engine_get_current_time(engine);
     print_progress(step, max_steps, current_time);
     printf("\n");
@@ -222,10 +502,12 @@ int run_simulation(KinematicsEngine *engine, uint32_t max_steps, int verbose) {
     printf("  仿真时长: %.2f小时\n", current_time / 3600.0);
     printf("  执行耗时: %.2f秒\n", elapsed);
     printf("  性能: %.2f 步/秒\n", step / elapsed);
+    printf("\n✓ 输出文件: red_satellites_trajectory.csv\n");
     printf("\n");
     
     return 0;
 }
+
 
 void print_final_statistics(KinematicsEngine *engine) {
     printf("╔════════════════════════════════════════════════════════════╗\n");

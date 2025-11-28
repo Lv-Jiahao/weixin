@@ -148,57 +148,57 @@ CMakeFiles/satellite_sim.dir/src/formation/formation_base.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/formation_base.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/formation_base.c" -o CMakeFiles/satellite_sim.dir/src/formation/formation_base.c.s
 
-CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o: CMakeFiles/satellite_sim.dir/flags.make
-CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o: ../src/formation/inspect_formation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o   -c "/home/haney/code-(c)/outputs/src/formation/inspect_formation.c"
+CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o: CMakeFiles/satellite_sim.dir/flags.make
+CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o: ../src/formation/formation_inspect.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o   -c "/home/haney/code-(c)/outputs/src/formation/formation_inspect.c"
 
-CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/inspect_formation.c" > CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.i
+CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/formation_inspect.c" > CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.i
 
-CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/inspect_formation.c" -o CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.s
+CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/formation_inspect.c" -o CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.s
 
-CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o: CMakeFiles/satellite_sim.dir/flags.make
-CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o: ../src/formation/around_formation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o   -c "/home/haney/code-(c)/outputs/src/formation/around_formation.c"
+CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o: CMakeFiles/satellite_sim.dir/flags.make
+CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o: ../src/formation/formation_around.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o   -c "/home/haney/code-(c)/outputs/src/formation/formation_around.c"
 
-CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/around_formation.c" > CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.i
+CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/formation_around.c" > CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.i
 
-CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/around_formation.c" -o CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.s
+CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/formation_around.c" -o CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.s
 
-CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o: CMakeFiles/satellite_sim.dir/flags.make
-CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o: ../src/formation/circumnavigate_formation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o   -c "/home/haney/code-(c)/outputs/src/formation/circumnavigate_formation.c"
+CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o: CMakeFiles/satellite_sim.dir/flags.make
+CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o: ../src/formation/formation_circumnavigate.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o   -c "/home/haney/code-(c)/outputs/src/formation/formation_circumnavigate.c"
 
-CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/circumnavigate_formation.c" > CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.i
+CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/formation_circumnavigate.c" > CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.i
 
-CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/circumnavigate_formation.c" -o CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.s
+CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/formation_circumnavigate.c" -o CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.s
 
-CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o: CMakeFiles/satellite_sim.dir/flags.make
-CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o: ../src/formation/retreat_formation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o   -c "/home/haney/code-(c)/outputs/src/formation/retreat_formation.c"
+CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o: CMakeFiles/satellite_sim.dir/flags.make
+CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o: ../src/formation/formation_retreat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/haney/code-(c)/outputs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o   -c "/home/haney/code-(c)/outputs/src/formation/formation_retreat.c"
 
-CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/retreat_formation.c" > CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.i
+CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/haney/code-(c)/outputs/src/formation/formation_retreat.c" > CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.i
 
-CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/retreat_formation.c" -o CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.s
+CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/haney/code-(c)/outputs/src/formation/formation_retreat.c" -o CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.s
 
 CMakeFiles/satellite_sim.dir/src/decision/decision_tree.c.o: CMakeFiles/satellite_sim.dir/flags.make
 CMakeFiles/satellite_sim.dir/src/decision/decision_tree.c.o: ../src/decision/decision_tree.c
@@ -274,10 +274,10 @@ satellite_sim_OBJECTS = \
 "CMakeFiles/satellite_sim.dir/src/orbit.c.o" \
 "CMakeFiles/satellite_sim.dir/src/attitude.c.o" \
 "CMakeFiles/satellite_sim.dir/src/formation/formation_base.c.o" \
-"CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o" \
-"CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o" \
-"CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o" \
-"CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o" \
+"CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o" \
+"CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o" \
+"CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o" \
+"CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o" \
 "CMakeFiles/satellite_sim.dir/src/decision/decision_tree.c.o" \
 "CMakeFiles/satellite_sim.dir/src/decision/differential_game.c.o" \
 "CMakeFiles/satellite_sim.dir/src/decision/formation_manager.c.o" \
@@ -294,10 +294,10 @@ bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/satellite.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/orbit.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/attitude.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/formation_base.c.o
-bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o
-bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o
-bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o
-bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o
+bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o
+bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o
+bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o
+bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/decision/decision_tree.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/decision/differential_game.c.o
 bin/satellite_sim: CMakeFiles/satellite_sim.dir/src/decision/formation_manager.c.o

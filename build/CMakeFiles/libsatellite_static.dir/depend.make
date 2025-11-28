@@ -10,20 +10,12 @@ CMakeFiles/libsatellite_static.dir/src/attitude.c.o: ../src/attitude.c
 
 CMakeFiles/libsatellite_static.dir/src/config/config.c.o: ../src/config/config.c
 
-CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/constants.h
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/decision/decision_tree.h
-CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/satellite.h
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../include/vector3.h
 CMakeFiles/libsatellite_static.dir/src/decision/decision_tree.c.o: ../src/decision/decision_tree.c
 
-CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/constants.h
 CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/decision/differential_game.h
-CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/satellite.h
 CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../include/vector3.h
 CMakeFiles/libsatellite_static.dir/src/decision/differential_game.c.o: ../src/decision/differential_game.c
 
 CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o: ../include/constants.h
@@ -34,21 +26,9 @@ CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o: ../includ
 CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o: ../include/vector3.h
 CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.o: ../src/decision/formation_manager.c
 
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/constants.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/formation/formation_base.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/satellite.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../include/vector3.h
-CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o: ../src/formation/around_formation.c
-
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/constants.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/formation/formation_base.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/satellite.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../include/vector3.h
-CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o: ../src/formation/circumnavigate_formation.c
+CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.o: ../include/formation/formation_around.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.o: ../include/types.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.o: ../src/formation/formation_around.c
 
 CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o: ../include/constants.h
 CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o: ../include/formation/formation_base.h
@@ -58,25 +38,25 @@ CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o: ../include/
 CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o: ../include/vector3.h
 CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.o: ../src/formation/formation_base.c
 
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/constants.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/formation/formation_base.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/satellite.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../include/vector3.h
-CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o: ../src/formation/inspect_formation.c
+CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.o: ../include/formation/formation_circumnavigate.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.o: ../include/types.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.o: ../src/formation/formation_circumnavigate.c
 
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/constants.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/formation/formation_base.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/quaternion.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/satellite.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/types.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../include/vector3.h
-CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o: ../src/formation/retreat_formation.c
+CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.o: ../include/formation/formation_inspect.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.o: ../include/types.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.o: ../src/formation/formation_inspect.c
+
+CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.o: ../include/formation/formation_retreat.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.o: ../include/types.h
+CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.o: ../src/formation/formation_retreat.c
 
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/attitude.h
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/constants.h
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/decision/formation_manager.h
+CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/formation/formation_around.h
+CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/formation/formation_circumnavigate.h
+CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/formation/formation_inspect.h
+CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/formation/formation_retreat.h
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/kinematics.h
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/orbit.h
 CMakeFiles/libsatellite_static.dir/src/kinematics.c.o: ../include/quaternion.h

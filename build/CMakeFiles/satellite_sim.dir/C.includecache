@@ -6,6 +6,56 @@
 
 #IncludeRegexTransform: 
 
+../include/attitude.h
+types.h
+../include/types.h
+vector3.h
+../include/vector3.h
+quaternion.h
+../include/quaternion.h
+
+../include/constants.h
+
+../include/decision/formation_manager.h
+types.h
+-
+satellite.h
+-
+
+../include/formation/formation_around.h
+types.h
+../include/formation/types.h
+
+../include/formation/formation_circumnavigate.h
+types.h
+../include/formation/types.h
+
+../include/formation/formation_inspect.h
+types.h
+../include/formation/types.h
+
+../include/formation/formation_retreat.h
+types.h
+../include/formation/types.h
+
+../include/kinematics.h
+types.h
+-
+satellite.h
+-
+orbit.h
+-
+attitude.h
+-
+decision/formation_manager.h
+-
+
+../include/orbit.h
+types.h
+../include/types.h
+vector3.h
+../include/vector3.h
+constants.h
 ../include/constants.h
 
 ../include/quaternion.h
@@ -42,8 +92,8 @@ types.h
 math.h
 -
 
-/home/haney/code-(c)/outputs/src/satellite.c
-satellite.h
+/home/haney/code-(c)/outputs/src/kinematics.c
+kinematics.h
 -
 stdlib.h
 -
@@ -51,4 +101,12 @@ stdio.h
 -
 string.h
 -
+formation/formation_around.h
+/home/haney/code-(c)/outputs/src/formation/formation_around.h
+formation/formation_inspect.h
+/home/haney/code-(c)/outputs/src/formation/formation_inspect.h
+formation/formation_circumnavigate.h
+/home/haney/code-(c)/outputs/src/formation/formation_circumnavigate.h
+formation/formation_retreat.h
+/home/haney/code-(c)/outputs/src/formation/formation_retreat.h
 

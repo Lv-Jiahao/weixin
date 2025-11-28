@@ -1,215 +1,308 @@
-#include <decision/differential_game.h>
+#include "decision/differential_game.h"
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdio.h>
 
-/* ============ 卫星分类函数 ============ */
+#define MU 3.986004418e5  // 地球重力参数 km³/s²
 
-ClassifiedSatellites* classified_satellites_create(int num_satellites) {
-    ClassifiedSatellites *cs = (ClassifiedSatellites*)malloc(sizeof(ClassifiedSatellites));
-    if (!cs) return NULL;
-    
-    cs->attack_satellites = (int*)calloc(num_satellites, sizeof(int));
-    cs->recon_satellites = (int*)calloc(num_satellites, sizeof(int));
-    cs->defense_satellites = (int*)calloc(num_satellites, sizeof(int));
-    
-    if (!cs->attack_satellites || !cs->recon_satellites || !cs->defense_satellites) {
-        classified_satellites_destroy(cs);
-        return NULL;
-    }
-    
-    cs->num_attack = 0;
-    cs->num_recon = 0;
-    cs->num_defense = 0;
-    
-    return cs;
+/**
+ * 计算两个卫星之间的距离
+ */
+static double calculate_distance(Vector3 pos1, Vector3 pos2) {
+    double dx = pos1.x - pos2.x;
+    double dy = pos1. y - pos2.y;
+    double dz = pos1. z - pos2.z;
+    return sqrt(dx*dx + dy*dy + dz*dz);
 }
 
-void classified_satellites_destroy(ClassifiedSatellites *cs) {
-    if (!cs) return;
-    free(cs->attack_satellites);
-    free(cs->recon_satellites);
-    free(cs->defense_satellites);
-    free(cs);
+/**
+ * 计算向量的模长
+ */
+static double vector_magnitude(Vector3 v) {
+    return sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
 }
 
-int classify_satellites(Satellite **satellites, int num_satellites, ClassifiedSatellites *classified) {
-    if (!satellites || !classified) return -1;
-    return 0;
-}
-
-/* ============ 威胁评估函数 ============ */
-
-ThreatAssessment* threat_assessment_create(int num_targets) {
-    ThreatAssessment *ta = (ThreatAssessment*)malloc(sizeof(ThreatAssessment));
-    if (!ta) return NULL;
+/**
+ * - 贪心最大权匹配
+ */
+static void hungarian_assignment_greedy(
+    const double *payoff_matrix,
+    int num_red,
+    int num_blue,
+    int *assignments) {
     
-    ta->target_ids = (int*)malloc(sizeof(int) * num_targets);
-    ta->threat_scores = (double*)malloc(sizeof(double) * num_targets);
+    // 初始化：所有红星无分配（-1）
+    memset(assignments, -1, sizeof(int) * num_red);
     
-    if (!ta->target_ids || !ta->threat_scores) {
-        threat_assessment_destroy(ta);
-        return NULL;
-    }
+    int *used_blue = (int*)calloc(num_blue, sizeof(int));
+    if (!used_blue) return;
     
-    ta->num_targets = num_targets;
-    memset(ta->target_ids, -1, sizeof(int) * num_targets);
-    memset(ta->threat_scores, 0, sizeof(double) * num_targets);
+    // 按收益从高到低贪心分配
+    // 最多分配 min(num_red, num_blue) 对
+    int num_pairs = (num_red < num_blue) ? num_red : num_blue;
     
-    return ta;
-}
-
-void threat_assessment_destroy(ThreatAssessment *ta) {
-    if (!ta) return;
-    free(ta->target_ids);
-    free(ta->threat_scores);
-    free(ta);
-}
-
-int assess_threats(Satellite **red_satellites, int num_red, Satellite **blue_satellites, 
-                   int num_blue, ThreatAssessment *assessment) {
-    if (!red_satellites || !blue_satellites || !assessment) return -1;
-    
-    for (int i = 0; i < num_blue && i < assessment->num_targets; i++) {
-        if (blue_satellites[i]) {
-            assessment->target_ids[i] = blue_satellites[i]->id;
-            double threat = 0.0;
-            assessment->threat_scores[i] = threat;
+    for (int pair = 0; pair < num_pairs; pair++) {
+        double max_payoff = -1e100;
+        int best_red = -1;
+        int best_blue = -1;
+        
+        // 找到最大未分配收益
+        for (int red = 0; red < num_red; red++) {
+            if (assignments[red] != -1) continue;  // 已分配
+            
+            for (int blue = 0; blue < num_blue; blue++) {
+                if (used_blue[blue]) continue;  // 已被占用
+                
+                double payoff = payoff_matrix[red * num_blue + blue];
+                if (payoff > max_payoff) {
+                    max_payoff = payoff;
+                    best_red = red;
+                    best_blue = blue;
+                }
+            }
+        }
+        
+        // 分配最大收益的红蓝星对
+        if (best_red >= 0 && best_blue >= 0) {
+            assignments[best_red] = best_blue;
+            used_blue[best_blue] = 1;
+        } else {
+            break;  // 无更多有效分配
         }
     }
     
-    return 0;
+    free(used_blue);
 }
 
-/* ============ 策略分配函数 ============ */
+/* ==================== 公开接口实现 ==================== */
 
-StrategyAssignment* strategy_assignment_create(int num_red) {
-    StrategyAssignment *sa = (StrategyAssignment*)malloc(sizeof(StrategyAssignment));
-    if (!sa) return NULL;
+double differential_game_calculate_threat(
+    Satellite *red_sat,
+    Satellite *blue_sat) {
     
-    sa->strategies = (StrategyType*)malloc(sizeof(StrategyType) * num_red);
-    sa->target_assignments = (int*)malloc(sizeof(int) * num_red);
+    if (!red_sat || !blue_sat) return 0;
     
-    if (!sa->strategies || !sa->target_assignments) {
-        strategy_assignment_destroy(sa);
-        return NULL;
-    }
+    // 距离因素 (km)
+    double distance = calculate_distance(
+        red_sat->state.position,
+        blue_sat->state.position
+    );
+    double distance_factor = 100.0 / (1.0 + distance / 10000.0);  // 距离越近，威胁越大
     
-    sa->num_satellites = num_red;
-    memset(sa->strategies, 0, sizeof(StrategyType) * num_red);
-    memset(sa->target_assignments, -1, sizeof(int) * num_red);
+    // 燃料因素
+    double fuel_factor = (red_sat->fuel / 1000.0) * 20.0;  // 燃料越多，威胁越大
     
-    return sa;
-}
-
-void strategy_assignment_destroy(StrategyAssignment *sa) {
-    if (!sa) return;
-    free(sa->strategies);
-    free(sa->target_assignments);
-    free(sa);
-}
-
-int assign_attack_strategy(Satellite *red_sat, Satellite *blue_target, StrategyAssignment *assignment) {
-    if (!red_sat || !blue_target || !assignment) return -1;
-    return 0;
-}
-
-int assign_recon_strategy(Satellite *red_sat, Satellite *blue_target, StrategyAssignment *assignment) {
-    if (!red_sat || !blue_target || !assignment) return -1;
-    return 0;
-}
-
-int assign_defense_strategy(Satellite *red_sat, Satellite *blue_threat, StrategyAssignment *assignment) {
-    if (!red_sat || !blue_threat || !assignment) return -1;
-    return 0;
-}
-
-/* ============ 距离和目标选择函数 ============ */
-
-double** calculate_distance_matrix(Satellite **red_satellites, int num_red, 
-                                   Satellite **blue_satellites, int num_blue) {
-    if (!red_satellites || !blue_satellites) return NULL;
+    // 相对速度因素
+    double vel_x = red_sat->state.velocity. x - blue_sat->state.velocity. x;
+    double vel_y = red_sat->state.velocity.y - blue_sat->state.velocity.y;
+    double vel_z = red_sat->state.velocity.z - blue_sat->state.velocity.z;
+    double rel_vel = sqrt(vel_x*vel_x + vel_y*vel_y + vel_z*vel_z);
+    double velocity_factor = rel_vel * 5.0;  // 相对速度越大，威胁越大
     
-    double **matrix = (double**)malloc(sizeof(double*) * num_red);
-    if (!matrix) return NULL;
+    // 功能因素
+    double function_factor = 0;
+    if (red_sat->function_type == 0) function_factor = 30.0;  // 攻击威胁大
+    else if (red_sat->function_type == 1) function_factor = 15.0;  // 侦察威胁中
+    else function_factor = 10.0;  // 防御威胁小
     
-    for (int i = 0; i < num_red; i++) {
-        matrix[i] = (double*)calloc(num_blue, sizeof(double));
-        if (!matrix[i]) {
-            free_distance_matrix(matrix, i);
-            return NULL;
-        }
-    }
+    double threat_level = distance_factor + fuel_factor + velocity_factor + function_factor;
+    return (threat_level < 100.0) ? threat_level : 100.0;  // 限制在0-100
+}
+
+double differential_game_calculate_payoff(
+    Satellite *red_sat,
+    Satellite *blue_sat,
+    int strategy) {
     
-    return matrix;
-}
-
-void free_distance_matrix(double **matrix, int num_red) {
-    if (!matrix) return;
-    for (int i = 0; i < num_red; i++) {
-        free(matrix[i]);
-    }
-    free(matrix);
-}
-
-int select_target_for_satellite(Satellite *red_sat, ThreatAssessment *threats, int *selected_target) {
-    if (!red_sat || !threats || !selected_target) return -1;
-    *selected_target = (threats->num_targets > 0) ? threats->target_ids[0] : -1;
-    return 0;
-}
-
-int select_global_host(Satellite **blue_satellites, int num_blue, ThreatAssessment *threats, int *host_id) {
-    if (!blue_satellites || !threats || !host_id) return -1;
+    if (!red_sat || !blue_sat) return 0;
     
-    if (threats->num_targets <= 0) {
-        *host_id = -1;
-        return -1;
-    }
+    double distance = calculate_distance(
+        red_sat->state.position,
+        blue_sat->state.position
+    );
     
-    *host_id = threats->target_ids[0];
-    return 0;
-}
-
-int allocate_fuel_resources(Satellite **red_satellites, int num_red, int num_missions) {
-    if (!red_satellites) return -1;
-    return 0;
-}
-
-int execute_cooperative_strategy(Satellite **red_satellites, int num_red, StrategyAssignment *assignment) {
-    if (!red_satellites || !assignment) return -1;
-    return 0;
-}
-
-int evaluate_game_outcome(StrategyAssignment *red_strategy, StrategyAssignment *blue_strategy, 
-                          double *red_payoff, double *blue_payoff) {
-    if (!red_strategy || !blue_strategy || !red_payoff || !blue_payoff) return -1;
-    return 0;
-}
-
-/* ============ 微分博弈辅助函数 ============ */
-
-int differential_game_get_role_weight(SatelliteFunctionType function_type) {
-    switch (function_type) {
-        case FUNCTION_ATTACK:
-            return 2;
-        case FUNCTION_RECON:
-            return 1;
-        case FUNCTION_DEFENSE:
-            return 2;
+    double threat = differential_game_calculate_threat(red_sat, blue_sat);
+    
+    // 收益计算 (基于策略和距离)
+    double payoff = 0;
+    
+    switch (strategy) {
+        case 0:  // STRATEGY_ATTACK
+            // 攻击策略：距离越近、威胁越大，收益越高
+            payoff = 50.0 - (distance / 100000.0) + (threat / 2.0);
+            break;
+            
+        case 1:  // STRATEGY_RECON
+            // 侦察策略：中距离最优
+            payoff = 30.0 - fabs(distance - 50000.0) / 10000.0 + (threat / 3.0);
+            break;
+            
+        case 2:  // STRATEGY_DEFENSE
+            // 防御策略：远距离最优
+            payoff = 20.0 + (distance / 50000.0);
+            break;
+            
         default:
-            return 1;
+            payoff = 0;
     }
+    
+    // 燃料充足度修正
+    double fuel_ratio = red_sat->fuel / 1000.0;
+    if (fuel_ratio < 0.3) payoff *= 0.5;  // 燃料少则收益减半
+    
+    return payoff;
 }
 
-int differential_game_calculate_payoff(Satellite *red_satellite, Satellite *blue_satellite, 
-                                       int red_strategy, int blue_strategy) {
-    if (!red_satellite || !blue_satellite) return 0;
-    return 0;
+GameResult* differential_game_assign_strategies(
+    Satellite **red_satellites,
+    int num_red,
+    Satellite **blue_satellites,
+    int num_blue,
+    const char *strategy_type) {
+    
+    if (!red_satellites || ! blue_satellites || num_red <= 0 || num_blue <= 0) {
+        fprintf(stderr, "[错误] 微分博弈: 输入参数无效\n");
+        return NULL;
+    }
+    
+    printf("[微分博弈] 开始策略分配: %d红vs%d蓝, 策略=%s\n",
+           num_red, num_blue, strategy_type ?  strategy_type : "未指定");
+    
+    // 分配结果结构
+    GameResult *result = (GameResult*)malloc(sizeof(GameResult));
+    if (!result) {
+        fprintf(stderr, "[错误] 内存分配失败\n");
+        return NULL;
+    }
+    
+    result->num_red_satellites = num_red;
+    result->num_blue_satellites = num_blue;
+    result->strategy_assignments = (int*)malloc(sizeof(int) * num_red);
+    result->target_assignments = (int*)malloc(sizeof(int) * num_red);
+    result->payoff_matrix = (double*)malloc(sizeof(double) * num_red * num_blue);
+    
+    if (!result->strategy_assignments || !result->target_assignments || !result->payoff_matrix) {
+        fprintf(stderr, "[错误] 内存分配失败\n");
+        free(result->strategy_assignments);
+        free(result->target_assignments);
+        free(result->payoff_matrix);
+        free(result);
+        return NULL;
+    }
+    
+    // ===== Step 1: 确定每个红星的策略 =====
+    int default_strategy = 0;  // STRATEGY_ATTACK
+    if (strategy_type) {
+        if (strcmp(strategy_type, "ZC") == 0) {
+            default_strategy = 1;  // STRATEGY_RECON
+        } else if (strcmp(strategy_type, "FY") == 0) {
+            default_strategy = 2;  // STRATEGY_DEFENSE
+        }
+    }
+    
+    // 根据卫星功能类型分配策略
+    for (int i = 0; i < num_red; i++) {
+        Satellite *sat = red_satellites[i];
+        
+        // 优先使用卫星本身的功能类型
+        if (sat->function_type == 0) {
+            result->strategy_assignments[i] = 0;  // 攻击卫星 -> 攻击策略
+        } else if (sat->function_type == 1) {
+            result->strategy_assignments[i] = 1;  // 侦察卫星 -> 侦察策略
+        } else {
+            result->strategy_assignments[i] = 2;  // 防御卫星 -> 防御策略
+        }
+    }
+    
+    // ===== Step 2: 计算收益矩阵 =====
+    printf("[微分博弈] 计算收益矩阵...\n");
+    
+    for (int r = 0; r < num_red; r++) {
+        for (int b = 0; b < num_blue; b++) {
+            double payoff = differential_game_calculate_payoff(
+                red_satellites[r],
+                blue_satellites[b],
+                result->strategy_assignments[r]
+            );
+            result->payoff_matrix[r * num_blue + b] = payoff;
+        }
+    }
+    
+    // ===== Step 3: 最优分配 =====
+    printf("[微分博弈] 执行最优分配...\n");
+    hungarian_assignment_greedy(
+        result->payoff_matrix,
+        num_red,
+        num_blue,
+        result->target_assignments
+    );
+    
+    // ===== 打印分配结果 =====
+    printf("[微分博弈] 分配完成:\n");
+    for (int r = 0; r < num_red; r++) {
+        int target_id = result->target_assignments[r];
+        if (target_id >= 0 && target_id < num_blue) {
+            double payoff = result->payoff_matrix[r * num_blue + target_id];
+            const char *strat_name = 
+                result->strategy_assignments[r] == 0 ? "攻击" :
+                result->strategy_assignments[r] == 1 ? "侦察" : "防御";
+            
+            printf("  红星%d -> 蓝星%d [%s] 收益=%.2f\n",
+                   red_satellites[r]->id,
+                   blue_satellites[target_id]->id,
+                   strat_name,
+                   payoff);
+        } else {
+            printf("  红星%d -> 无目标\n", red_satellites[r]->id);
+        }
+    }
+    
+    return result;
 }
 
-int differential_game_assign_strategies(Satellite **red_satellites, int num_red, 
-                                        Satellite **blue_satellites, int num_blue, 
-                                        StrategyAssignment *assignment) {
-    if (!red_satellites || !blue_satellites || !assignment) return -1;
-    return 0;
+void differential_game_hungarian_assignment(
+    const double *payoff_matrix,
+    int num_red,
+    int num_blue,
+    int *assignments) {
+    
+    hungarian_assignment_greedy(payoff_matrix, num_red, num_blue, assignments);
+}
+
+void differential_game_free_result(GameResult *result) {
+    if (! result) return;
+    
+    if (result->strategy_assignments) free(result->strategy_assignments);
+    if (result->target_assignments) free(result->target_assignments);
+    if (result->payoff_matrix) free(result->payoff_matrix);
+    
+    free(result);
+}
+
+void differential_game_print_result(const GameResult *result) {
+    if (!result) {
+        fprintf(stderr, "[错误] 博弈结果为空\n");
+        return;
+    }
+    
+    printf("\n=== 微分博弈结果 ===\n");
+    printf("红方卫星数: %d\n", result->num_red_satellites);
+    printf("蓝方卫星数: %d\n", result->num_blue_satellites);
+    
+    printf("\n收益矩阵 (红x蓝):\n");
+    for (int r = 0; r < result->num_red_satellites; r++) {
+        printf("Red %d: ", r);
+        for (int b = 0; b < result->num_blue_satellites; b++) {
+            printf("%.2f ", result->payoff_matrix[r * result->num_blue_satellites + b]);
+        }
+        printf("\n");
+    }
+    
+    printf("\n最优分配:\n");
+    for (int r = 0; r < result->num_red_satellites; r++) {
+        if (result->target_assignments[r] >= 0) {
+            printf("Red %d -> Blue %d\n", r, result->target_assignments[r]);
+        }
+    }
 }

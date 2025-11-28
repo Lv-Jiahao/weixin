@@ -7,6 +7,15 @@
 #include <attitude.h>
 #include <decision/formation_manager.h>
 
+/* ==================== 编队控制器结构 ==================== */
+typedef struct {
+    void *around_state;              // AroundFormationState*
+    void *inspect_state;             // InspectFormationState*
+    void *circumnavigate_state;      // CircumnavigateFormationState*
+    void *retreat_state;             // RetreatFormationState*
+} FormationControllers;
+
+/* ==================== 运动学引擎结构 ==================== */
 typedef struct KinematicsEngine {
     Satellite **satellites;
     int satellite_count;
@@ -25,6 +34,9 @@ typedef struct KinematicsEngine {
     
     StrategyThresholds strategy_thresholds;
     
+    // ===== 新增：编队控制器 =====
+    FormationControllers formation_controllers;
+    
     FILE *state_file;
     FILE *maneuver_file;
     FILE *history_file;
@@ -33,6 +45,7 @@ typedef struct KinematicsEngine {
     double total_fuel_consumed;
 } KinematicsEngine;
 
+/* ==================== 基本引擎函数 ==================== */
 KinematicsEngine* kinematics_engine_create(SimulationConfig config);
 void kinematics_engine_destroy(KinematicsEngine *engine);
 

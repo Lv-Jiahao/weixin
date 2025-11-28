@@ -297,65 +297,35 @@ src/decision/formation_manager.c.s:
 	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/decision/formation_manager.c.s
 .PHONY : src/decision/formation_manager.c.s
 
-src/formation/around_formation.o: src/formation/around_formation.c.o
+src/formation/formation_around.o: src/formation/formation_around.c.o
 
-.PHONY : src/formation/around_formation.o
-
-# target to build an object file
-src/formation/around_formation.c.o:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.o
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.o
-.PHONY : src/formation/around_formation.c.o
-
-src/formation/around_formation.i: src/formation/around_formation.c.i
-
-.PHONY : src/formation/around_formation.i
-
-# target to preprocess a source file
-src/formation/around_formation.c.i:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.i
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.i
-.PHONY : src/formation/around_formation.c.i
-
-src/formation/around_formation.s: src/formation/around_formation.c.s
-
-.PHONY : src/formation/around_formation.s
-
-# target to generate assembly for a file
-src/formation/around_formation.c.s:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/around_formation.c.s
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/around_formation.c.s
-.PHONY : src/formation/around_formation.c.s
-
-src/formation/circumnavigate_formation.o: src/formation/circumnavigate_formation.c.o
-
-.PHONY : src/formation/circumnavigate_formation.o
+.PHONY : src/formation/formation_around.o
 
 # target to build an object file
-src/formation/circumnavigate_formation.c.o:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.o
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.o
-.PHONY : src/formation/circumnavigate_formation.c.o
+src/formation/formation_around.c.o:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.o
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.o
+.PHONY : src/formation/formation_around.c.o
 
-src/formation/circumnavigate_formation.i: src/formation/circumnavigate_formation.c.i
+src/formation/formation_around.i: src/formation/formation_around.c.i
 
-.PHONY : src/formation/circumnavigate_formation.i
+.PHONY : src/formation/formation_around.i
 
 # target to preprocess a source file
-src/formation/circumnavigate_formation.c.i:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.i
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.i
-.PHONY : src/formation/circumnavigate_formation.c.i
+src/formation/formation_around.c.i:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.i
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.i
+.PHONY : src/formation/formation_around.c.i
 
-src/formation/circumnavigate_formation.s: src/formation/circumnavigate_formation.c.s
+src/formation/formation_around.s: src/formation/formation_around.c.s
 
-.PHONY : src/formation/circumnavigate_formation.s
+.PHONY : src/formation/formation_around.s
 
 # target to generate assembly for a file
-src/formation/circumnavigate_formation.c.s:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/circumnavigate_formation.c.s
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/circumnavigate_formation.c.s
-.PHONY : src/formation/circumnavigate_formation.c.s
+src/formation/formation_around.c.s:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_around.c.s
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_around.c.s
+.PHONY : src/formation/formation_around.c.s
 
 src/formation/formation_base.o: src/formation/formation_base.c.o
 
@@ -387,65 +357,95 @@ src/formation/formation_base.c.s:
 	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_base.c.s
 .PHONY : src/formation/formation_base.c.s
 
-src/formation/inspect_formation.o: src/formation/inspect_formation.c.o
+src/formation/formation_circumnavigate.o: src/formation/formation_circumnavigate.c.o
 
-.PHONY : src/formation/inspect_formation.o
-
-# target to build an object file
-src/formation/inspect_formation.c.o:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.o
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.o
-.PHONY : src/formation/inspect_formation.c.o
-
-src/formation/inspect_formation.i: src/formation/inspect_formation.c.i
-
-.PHONY : src/formation/inspect_formation.i
-
-# target to preprocess a source file
-src/formation/inspect_formation.c.i:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.i
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.i
-.PHONY : src/formation/inspect_formation.c.i
-
-src/formation/inspect_formation.s: src/formation/inspect_formation.c.s
-
-.PHONY : src/formation/inspect_formation.s
-
-# target to generate assembly for a file
-src/formation/inspect_formation.c.s:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/inspect_formation.c.s
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/inspect_formation.c.s
-.PHONY : src/formation/inspect_formation.c.s
-
-src/formation/retreat_formation.o: src/formation/retreat_formation.c.o
-
-.PHONY : src/formation/retreat_formation.o
+.PHONY : src/formation/formation_circumnavigate.o
 
 # target to build an object file
-src/formation/retreat_formation.c.o:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.o
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.o
-.PHONY : src/formation/retreat_formation.c.o
+src/formation/formation_circumnavigate.c.o:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.o
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.o
+.PHONY : src/formation/formation_circumnavigate.c.o
 
-src/formation/retreat_formation.i: src/formation/retreat_formation.c.i
+src/formation/formation_circumnavigate.i: src/formation/formation_circumnavigate.c.i
 
-.PHONY : src/formation/retreat_formation.i
+.PHONY : src/formation/formation_circumnavigate.i
 
 # target to preprocess a source file
-src/formation/retreat_formation.c.i:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.i
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.i
-.PHONY : src/formation/retreat_formation.c.i
+src/formation/formation_circumnavigate.c.i:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.i
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.i
+.PHONY : src/formation/formation_circumnavigate.c.i
 
-src/formation/retreat_formation.s: src/formation/retreat_formation.c.s
+src/formation/formation_circumnavigate.s: src/formation/formation_circumnavigate.c.s
 
-.PHONY : src/formation/retreat_formation.s
+.PHONY : src/formation/formation_circumnavigate.s
 
 # target to generate assembly for a file
-src/formation/retreat_formation.c.s:
-	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/retreat_formation.c.s
-	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/retreat_formation.c.s
-.PHONY : src/formation/retreat_formation.c.s
+src/formation/formation_circumnavigate.c.s:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_circumnavigate.c.s
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_circumnavigate.c.s
+.PHONY : src/formation/formation_circumnavigate.c.s
+
+src/formation/formation_inspect.o: src/formation/formation_inspect.c.o
+
+.PHONY : src/formation/formation_inspect.o
+
+# target to build an object file
+src/formation/formation_inspect.c.o:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.o
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.o
+.PHONY : src/formation/formation_inspect.c.o
+
+src/formation/formation_inspect.i: src/formation/formation_inspect.c.i
+
+.PHONY : src/formation/formation_inspect.i
+
+# target to preprocess a source file
+src/formation/formation_inspect.c.i:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.i
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.i
+.PHONY : src/formation/formation_inspect.c.i
+
+src/formation/formation_inspect.s: src/formation/formation_inspect.c.s
+
+.PHONY : src/formation/formation_inspect.s
+
+# target to generate assembly for a file
+src/formation/formation_inspect.c.s:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_inspect.c.s
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_inspect.c.s
+.PHONY : src/formation/formation_inspect.c.s
+
+src/formation/formation_retreat.o: src/formation/formation_retreat.c.o
+
+.PHONY : src/formation/formation_retreat.o
+
+# target to build an object file
+src/formation/formation_retreat.c.o:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.o
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.o
+.PHONY : src/formation/formation_retreat.c.o
+
+src/formation/formation_retreat.i: src/formation/formation_retreat.c.i
+
+.PHONY : src/formation/formation_retreat.i
+
+# target to preprocess a source file
+src/formation/formation_retreat.c.i:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.i
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.i
+.PHONY : src/formation/formation_retreat.c.i
+
+src/formation/formation_retreat.s: src/formation/formation_retreat.c.s
+
+.PHONY : src/formation/formation_retreat.s
+
+# target to generate assembly for a file
+src/formation/formation_retreat.c.s:
+	$(MAKE) -f CMakeFiles/satellite_sim.dir/build.make CMakeFiles/satellite_sim.dir/src/formation/formation_retreat.c.s
+	$(MAKE) -f CMakeFiles/libsatellite_static.dir/build.make CMakeFiles/libsatellite_static.dir/src/formation/formation_retreat.c.s
+.PHONY : src/formation/formation_retreat.c.s
 
 src/kinematics.o: src/kinematics.c.o
 
@@ -650,21 +650,21 @@ help:
 	@echo "... src/decision/formation_manager.o"
 	@echo "... src/decision/formation_manager.i"
 	@echo "... src/decision/formation_manager.s"
-	@echo "... src/formation/around_formation.o"
-	@echo "... src/formation/around_formation.i"
-	@echo "... src/formation/around_formation.s"
-	@echo "... src/formation/circumnavigate_formation.o"
-	@echo "... src/formation/circumnavigate_formation.i"
-	@echo "... src/formation/circumnavigate_formation.s"
+	@echo "... src/formation/formation_around.o"
+	@echo "... src/formation/formation_around.i"
+	@echo "... src/formation/formation_around.s"
 	@echo "... src/formation/formation_base.o"
 	@echo "... src/formation/formation_base.i"
 	@echo "... src/formation/formation_base.s"
-	@echo "... src/formation/inspect_formation.o"
-	@echo "... src/formation/inspect_formation.i"
-	@echo "... src/formation/inspect_formation.s"
-	@echo "... src/formation/retreat_formation.o"
-	@echo "... src/formation/retreat_formation.i"
-	@echo "... src/formation/retreat_formation.s"
+	@echo "... src/formation/formation_circumnavigate.o"
+	@echo "... src/formation/formation_circumnavigate.i"
+	@echo "... src/formation/formation_circumnavigate.s"
+	@echo "... src/formation/formation_inspect.o"
+	@echo "... src/formation/formation_inspect.i"
+	@echo "... src/formation/formation_inspect.s"
+	@echo "... src/formation/formation_retreat.o"
+	@echo "... src/formation/formation_retreat.i"
+	@echo "... src/formation/formation_retreat.s"
 	@echo "... src/kinematics.o"
 	@echo "... src/kinematics.i"
 	@echo "... src/kinematics.s"
